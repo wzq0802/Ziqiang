@@ -26,7 +26,7 @@ def calculate_recall(pred_img, true_img):
     return recall
 
 
-pred_folder = 'DU/pred'
+pred_folder = 'U_EFC/pred'
 true_folder = 'true'
 
 

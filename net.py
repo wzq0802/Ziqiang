@@ -161,9 +161,9 @@ class edge(nn.Module):
         edge_features = x_avg_pool + x_max_pool
         return edge_features
 
-class DualSegNet(nn.Module):
+class SegNet_EFC(nn.Module):
     def __init__(self, n=8,edge_model_path='edge.pth'):
-        super(DualSegNet, self).__init__()
+        super(SegNet_EFC, self).__init__()
         self.edge_model = edge()
         self.edge_model.load_state_dict(torch.load(edge_model_path))
         self.edge_model.eval()
@@ -267,9 +267,9 @@ class Fusion(nn.Module):
         fusion_result = torch.relu(fusion_result)
         return fusion_result
 
-class DualUNet(nn.Module):
+class UNet_EFC(nn.Module):
     def __init__(self,n=8,edge_model_path='edge.pth'):
-        super(DualUNet, self).__init__()
+        super(UNet_EFC, self).__init__()
         self.c1 = Conv_Block2(2, n)
         self.d1 = DownSample2d(n,n*2)
         self.c2 = Conv_Block2(n*2, n*2)
@@ -394,9 +394,9 @@ class ResSegNet(nn.Module):
 
         return x
 
-class DualResSegNet(nn.Module):
+class ResSegNet_EFC(nn.Module):
     def __init__(self, n=8,edge_model_path='edge.pth'):
-        super(DualResSegNet, self).__init__()
+        super(ResSegNet_EFC, self).__init__()
         self.edge_model = edge()
         self.edge_model.load_state_dict(torch.load(edge_model_path))
         self.edge_model.eval()
@@ -535,9 +535,9 @@ class ResUNet(nn.Module):
 
         return self.out(O4)
 
-class DualResUNet(nn.Module):
+class ResUNet_EFC(nn.Module):
     def __init__(self,n=8,edge_model_path='edge.pth'):
-        super(DualResUNet, self).__init__()
+        super(ResUNet_EFC, self).__init__()
         self.edge_model = edge()
         self.edge_model.load_state_dict(torch.load(edge_model_path))
         self.edge_model.eval()
