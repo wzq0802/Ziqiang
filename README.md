@@ -1,4 +1,4 @@
- Network with edge Package
+Dual-path network Package
 ===========================
 
 ###########Environment
