@@ -68,7 +68,7 @@ valloader = DataLoader(val_data, batch_size=batch_size)
 # lambda_reg = 1e-5   ##Regularization to prevent overfitting on small datasets
 
 
-net=UNet_EFC().cuda()
+net=DualUNet().cuda()
 
 optimizer = optim.Adam(net.parameters(), lr=0.0001, betas=(0.5, 0.999))
 # optimizer = optim.Adam(net.parameters(), lr=0.0001, betas=(0.5, 0.999),weight_decay=1e-5)   ##Regularization to prevent overfitting on small datasets
@@ -128,13 +128,13 @@ for epoch in range(epochs):
 
 
     if epoch % 100 == 0 and epoch != 0:
-        torch.save(net.state_dict(), f"U_EFC/net_{epoch}.pth")
+        torch.save(net.state_dict(), f"DU/net_{epoch}.pth")
 
 
-torch.save(net.state_dict(), "U_EFC/net.pth")
+torch.save(net.state_dict(), "DU/net.pth")
 
 
-np.savetxt("U_EFC/Train Loss.csv", np.array(Loss_list))
-np.savetxt("U_EFC/Val Loss.csv", np.array(Val_loss_list))
+np.savetxt("DU/Train Loss.csv", np.array(Loss_list))
+np.savetxt("DU/Val Loss.csv", np.array(Val_loss_list))
 
 

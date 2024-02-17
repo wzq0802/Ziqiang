@@ -28,8 +28,8 @@ class trainset(Dataset):
         return len(self.images)
 
 
-G = UNet_EFC().cuda()
-mod = torch.load('U_EFC/net.pth')
+G = DualUNet().cuda()
+mod = torch.load('DU/net.pth')
 G.load_state_dict(mod)
 G.eval()
 
@@ -49,10 +49,10 @@ for data in trainloader:
         pred = np.where(pred<0.5,np.zeros_like(pred),np.ones_like(pred))
 
         res[i]=pred
-        plt.imsave("U_EFC/pred/%d.png"%(i),res[i].reshape(256,256),cmap="gray")
+        plt.imsave("DU/pred/%d.png"%(i),res[i].reshape(256,256),cmap="gray")
         i +=1
 
 print(res.shape)
-res.astype(np.uint8).tofile("U_EFC/pred.raw")
+res.astype(np.uint8).tofile("DU/pred.raw")
 
 
